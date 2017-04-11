@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="appConsultaGit">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Desafio Front-End Involves</title>
+	<link href="./css/custombootstrap.css" rel="stylesheet">
+	<link href="./css/font-awesome.min.css" rel="stylesheet">
+	<link href="./css/octicons.css" rel="stylesheet">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-route.js"></script>
+	<script src="./js/app.js"></script>
+	<script src="./js/lib/dirPagination.js"></script>
+	<script src="./js/factory/usuario-factory.js"></script>
+	<script src="./js/controller/usuario-controller.js"></script>
+
+</head>
+<body ng-controller="usuarioController">
+	<div class="container">
+	    <h1 class="text-center" ng-show="usuario.name">
+	        <span />{{usuario.name}}</span>
+	        <br>
+	        <a href="{{usuario.html_url}}" class="btn btn-default">
+	            <span class="octicon octicon-octoface"></span>
+	            {{usuario.login}}                        
+	        </a>
+
+	    </h1>
+
+		<div class="panel panel-default" ng-show="status != 404">
+		    <div class="panel-heading">
+		        <form novalidate class="form-inline" name="formBuscar">
+	                <div class="input-group">
+		                <span class="input-group-addon" id="basic-addon3">https://api.github.com/users/</span>
+		                <input type="text" id="basic-url" aria-describedby="basic-addon3" name="username" ng-model="username" placeholder="Digite o usuário do Github" class="form-control input-sm" required/>
+	                </div>
+	                <button type="submit" class="btn btn-primary btn-sm" ng-disabled="!formBuscar.$valid" ng-click="carregarUsuario(username)">Buscar</button>
+		        </form>
+				<br/>
+		      	<form ng-show="usuario.name" class="form-inline">
+		      		Observação: 
+		      		<div class="input-group">
+		      			<input type="text" id="mensagemUsuario" ng-model="mensagem" placeholder="Enviar mensagem" class="form-control input-sm"/>
+		      		</div>
+					<button type="submit" class="btn btn-primary btn-sm" ng-click="enviarMensagem(usuario.id, mensagem)">Enviar</button>
+					
+				</form>
+				<span ng-show="resultado">{{resultado}}</span><br/>
+		    </div>
+
+
+			<div class="panel-body">
+				<div class="list-group">
+				    <div ng-repeat="repositorio in repositorios" class="list-group-item ">
+				        <div class="row">
+				            <div class="col-md-8">
+				                <h4>
+				                    <small>
+				                        <span ng-if="repositorio.fork" class="octicon octicon-repo-forked"></span>
+				                        <span ng-if="!repositorio.fork" class="octicon octicon-repo"></span>
+				                    </small>
+				                    <a href="{{repositorio.html_url}}" target="_blank" >
+				                        {{repositorio.name}}
+				                    </a>
+				                    <small>{{repositorio.description}}</small>
+				                </h4>
+
+				                <small>
+				                    <a href="{{repositorio.homepage}}" class="">
+				                        <i class="fa fa-link"></i> Site
+				                    </a>
+				                </small>
+				            </div>
+				            <div class="col-md-4">
+				                <dl class="dl-horizontal">
+				                  <dt>Atualizado em:</dt>
+				                  <dd>{{repositorio.updated_at | date : short : timezone}}</dd>
+				                  <dt>Criado em:</dt>
+				                  <dd>{{repositorio.created_at| date : short : timezone}}</dd>
+				                </dl>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+			<dir-pagination-controls max-size="5" boundary-links="true"></dir-pagination-controls>
+		</div>
+
+<div ng-view="ng-view">
+
+</div>
+
+	</div>
+</body>
+</html>

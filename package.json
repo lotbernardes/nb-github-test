@@ -1,0 +1,29 @@
+{
+  "name": "teste-1",
+  "version": "1.0.0",
+  "description": "Teste AngularJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jasmine",
+    "karma"
+  ],
+  "author": "Niler Barcelos",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.6.4",
+    "angular-mocks": "^1.6.4",
+    "angular-ui-router": "^0.4.2",
+    "jasmine-ajax": "^3.3.1",
+    "jasmine-core": "^2.5.2",
+    "jasmine-node": "^1.14.5",
+    "karma": "^1.6.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0"
+  },
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
